@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bayena — Branding & Growth Studio",
+  title: "Bayena Ventures — Private Capital. Real Assets. Strategic Opportunities.",
   description:
-    "Strategy, design, campaigns, and web — a studio built for brands ready to scale.",
+    "Bayena Ventures is an asset management and private capital platform built for investors, borrowers, and business owners seeking structured financial opportunities.",
 };
 
 export default function RootLayout({
