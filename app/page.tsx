@@ -1,405 +1,420 @@
 import BayenaVenturesContactForm from "@/components/BayenaVenturesContactForm";
+import NewsletterForm from "@/components/NewsletterForm";
+import WhaleMark from "@/components/WhaleMark";
 
-function SectionHeading({
-  eyebrow,
-  title,
-  subtitle,
-}: {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-}) {
-  return (
-    <div className="mx-auto max-w-2xl text-center">
-      {eyebrow && (
-        <p className="text-sm font-semibold uppercase tracking-widest text-amber-600">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-        {title}
-      </h2>
-      {subtitle && <p className="mt-3 text-lg text-slate-600">{subtitle}</p>}
-    </div>
-  );
-}
+const BLUE = "#1a6b8a";
+const NAVY = "#0a1628";
 
-function CheckItem({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex items-start gap-3">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="mt-0.5 h-5 w-5 shrink-0 text-amber-600"
-        aria-hidden="true"
-      >
-        <path d="M20 6L9 17l-5-5" />
-      </svg>
-      <span className="text-slate-700">{children}</span>
-    </li>
-  );
-}
-
-const AUDIENCES = [
+const SERVICES = [
   {
-    title: "For Investors",
-    tagline: "Put your capital to work through private opportunities.",
-    intro: "Bayena Ventures offers access to selected investment opportunities, including:",
+    id: "ai-automation",
+    title: "AI & Automation",
+    description:
+      "Implement AI-powered systems that reduce manual work, improve customer experience, and increase operational efficiency.",
     items: [
-      "Asset-backed lending",
-      "Private credit",
-      "Real estate opportunities",
-      "Business funding deals",
-      "Revenue-share agreements",
-      "Short-term capital placements",
-      "Strategic acquisitions and partnerships",
+      "AI Chatbots",
+      "Lead Qualification",
+      "Workflow Automation",
+      "Client Onboarding",
+      "Email Automation",
+      "CRM Automation",
     ],
-    footer:
-      "Our goal is to identify opportunities where capital is protected by structure, collateral, cash flow, or clear business fundamentals.",
   },
   {
-    title: "For Borrowers",
-    tagline: "Access capital without traditional bank friction.",
-    intro: "Bayena Ventures works with borrowers who need funding for:",
+    id: "sales-systems",
+    title: "Sales Systems",
+    description:
+      "Build scalable sales processes that generate, nurture, and convert leads consistently.",
     items: [
-      "Business growth",
-      "Real estate transactions",
-      "Inventory or equipment",
-      "Short-term liquidity",
-      "Bridge financing",
-      "Project funding",
-      "Asset-backed loans",
+      "CRM Setup",
+      "Sales Pipelines",
+      "Lead Tracking",
+      "Follow-Up Automation",
+      "Sales Dashboards",
+      "Conversion Optimization",
     ],
-    footer:
-      "We review each opportunity based on collateral, repayment ability, business strength, and deal structure.",
   },
   {
-    title: "For Business Owners",
-    tagline: "Structure capital opportunities for growth.",
-    intro: "We can help with:",
+    id: "websites",
+    title: "Websites & Digital Presence",
+    description:
+      "Create modern websites and digital experiences designed to convert visitors into customers.",
     items: [
-      "Raising private capital",
-      "Structuring investor offers",
-      "Creating lending terms",
-      "Building deal presentations",
-      "Organizing financial documents",
-      "Reviewing business opportunities",
-      "Connecting with strategic capital partners",
+      "Website Design",
+      "Landing Pages",
+      "Booking Systems",
+      "Client Portals",
+      "Membership Platforms",
+      "Mobile Optimization",
     ],
-    footer:
-      "Bayena Ventures helps business owners structure capital opportunities for growth.",
+  },
+  {
+    id: "startup-growth",
+    title: "Startup Launch & Growth",
+    description:
+      "Turn ideas into businesses with structured strategy, positioning, and execution.",
+    items: [
+      "Business Model Development",
+      "Offer Creation",
+      "Pricing Strategy",
+      "Market Positioning",
+      "Go-To-Market Strategy",
+      "Brand Messaging",
+    ],
+  },
+  {
+    id: "infrastructure",
+    title: "Business Infrastructure",
+    description:
+      "Build the systems and processes necessary to scale efficiently.",
+    items: [
+      "KPI Dashboards",
+      "Reporting Systems",
+      "SOP Development",
+      "Team Workflows",
+      "Process Optimization",
+      "Business Operating Systems",
+    ],
   },
 ];
 
-const OPPORTUNITIES = [
-  "Private lending",
-  "Secured notes",
-  "Real estate-backed loans",
-  "Business loans",
-  "Profit participation deals",
-  "Revenue-share investments",
-  "Acquisition financing",
-  "Special situation opportunities",
-];
-
-const PRINCIPLES = [
-  "Clear deal terms",
-  "Asset protection",
-  "Transparent documentation",
-  "Responsible underwriting",
-  "Practical risk management",
-  "Strategic capital deployment",
-  "Long-term investor relationships",
-];
-
-const STEPS = [
+const DIFFERENTIATORS = [
   {
-    title: "Submit Your Opportunity",
-    body: "Investors, borrowers, and business owners can submit basic information about their goals.",
+    title: "Strategy First",
+    body: "We start with your business goals, then design systems and technology around them — not the other way around.",
   },
   {
-    title: "Review & Evaluation",
-    body: "We review the opportunity, capital need, risk profile, collateral, repayment plan, and potential upside.",
+    title: "Built to Scale",
+    body: "Every system we implement is designed to grow with your business, reducing friction as you add customers and team members.",
   },
   {
-    title: "Deal Structuring",
-    body: "If the opportunity fits, we help structure the terms, documents, timeline, and investor presentation.",
+    title: "Execution Focused",
+    body: "We don't just advise — we build. From automation to websites to sales workflows, we deliver working systems.",
   },
   {
-    title: "Capital Placement",
-    body: "Approved opportunities may be introduced to private capital partners, lenders, or investors.",
+    title: "Measurable Results",
+    body: "We define success in real numbers: leads generated, hours saved, revenue increased, conversion rates improved.",
   },
-  {
-    title: "Ongoing Management",
-    body: "We track performance, payments, reporting, communication, and investor updates.",
-  },
-];
-
-const WHO_WE_WORK_WITH = [
-  "Private investors",
-  "Entrepreneurs",
-  "Business owners",
-  "Real estate operators",
-  "Asset owners",
-  "High-income professionals",
-  "Borrowers seeking private capital",
-  "Investors seeking alternative opportunities",
 ];
 
 export default function HomePage() {
   return (
-    <div className="bg-white">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/95 backdrop-blur">
+    <div className="bg-white text-slate-800 antialiased">
+
+      {/* ── Header ─────────────────────────────────────────── */}
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <a href="#top" className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500 text-sm font-bold text-slate-950">
-              BV
-            </span>
-            <span className="text-sm font-semibold tracking-tight text-white">
-              Bayena Ventures
-            </span>
+            <WhaleMark className="h-5 w-11 text-[#1a6b8a]" />
+            <div className="leading-tight">
+              <span className="block text-sm font-bold tracking-tight text-slate-900">
+                BAYENA
+              </span>
+              <span className="block text-[10px] font-medium tracking-widest text-slate-400 uppercase">
+                Strategy · Systems · Growth
+              </span>
+            </div>
           </a>
-          <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-            <a href="#what-we-do" className="transition hover:text-white">
-              What We Do
-            </a>
-            <a href="#opportunities" className="transition hover:text-white">
-              Opportunities
-            </a>
-            <a href="#how-it-works" className="transition hover:text-white">
-              How It Works
-            </a>
-            <a href="#contact" className="transition hover:text-white">
-              Contact
-            </a>
+          <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
+            <a href="#services" className="transition hover:text-slate-900">Services</a>
+            <a href="#why-bayena" className="transition hover:text-slate-900">Why Bayena</a>
+            <a href="#contact" className="transition hover:text-slate-900">Contact</a>
           </nav>
           <a
             href="#contact"
-            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+            className="rounded-lg px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+            style={{ backgroundColor: BLUE }}
           >
-            Get Started
+            Book a Strategy Call
           </a>
         </div>
       </header>
 
-      <section id="top" className="relative overflow-hidden bg-slate-950">
+      {/* ── Hero ───────────────────────────────────────────── */}
+      <section id="top" className="relative overflow-hidden border-b border-slate-100">
+        {/* subtle grid background */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage:
-              "radial-gradient(600px 300px at 80% 20%, rgba(245,158,11,0.25), transparent), radial-gradient(500px 300px at 10% 80%, rgba(245,158,11,0.12), transparent)",
+              "linear-gradient(#1a6b8a 1px, transparent 1px), linear-gradient(90deg, #1a6b8a 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
           }}
         />
-        <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
-          <h1 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            Bayena Ventures
-          </h1>
-          <p className="mt-3 text-lg font-medium text-amber-400 sm:text-xl">
-            Private Capital. Real Assets. Strategic Opportunities.
-          </p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-            Bayena Ventures is an asset management and private capital platform built for
-            investors, borrowers, and business owners seeking structured financial
-            opportunities. We connect capital with opportunity through asset-backed lending,
-            private investment deals, business funding, and strategic capital partnerships.
-          </p>
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#contact"
-              className="rounded-lg bg-amber-500 px-6 py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
-            >
-              Submit a Funding Request
-            </a>
-            <a
-              href="#contact"
-              className="rounded-lg border border-slate-600 px-6 py-3 text-center text-sm font-semibold text-white transition hover:border-slate-400 hover:bg-white/5"
-            >
-              Join the Investor List
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="what-we-do" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
-        <SectionHeading
-          eyebrow="What We Do"
-          title="Structure, accountability, and clear terms"
-          subtitle="Bayena Ventures helps individuals, businesses, and investors participate in private financial opportunities. Our focus is simple:"
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[
-            "Help investors place capital into secured or strategic opportunities",
-            "Help borrowers access funding backed by assets, business income, or investment potential",
-            "Help businesses and operators structure deals, raise capital, and grow",
-          ].map((item, i) => (
+        <div className="relative mx-auto max-w-6xl px-4 py-28 sm:px-6 sm:py-36">
+          <div className="mx-auto max-w-3xl text-center">
             <div
-              key={i}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-6 text-center"
+              className="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
+              style={{ borderColor: `${BLUE}40`, color: BLUE }}
             >
-              <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-amber-500">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="mt-4 font-medium leading-relaxed text-slate-800">{item}</p>
+              AI · Automation · Growth Systems
             </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-slate-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <SectionHeading
-            eyebrow="Who It's For"
-            title="Built for investors, borrowers, and operators"
-          />
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {AUDIENCES.map((audience) => (
-              <div
-                key={audience.title}
-                className="flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm"
+            <h1 className="text-5xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl lg:text-[4rem]">
+              Build Faster.{" "}
+              <span style={{ color: BLUE }}>Scale Smarter.</span>
+            </h1>
+            <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-500 sm:text-xl">
+              We help startups and growing businesses implement AI, automation,
+              websites, and sales systems that drive measurable growth.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a
+                href="#contact"
+                className="w-full rounded-lg px-8 py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90 sm:w-auto"
+                style={{ backgroundColor: BLUE }}
               >
-                <h3 className="text-xl font-bold text-slate-900">{audience.title}</h3>
-                <p className="mt-1 font-medium text-amber-600">{audience.tagline}</p>
-                <p className="mt-4 text-sm text-slate-600">{audience.intro}</p>
-                <ul className="mt-4 flex-1 space-y-2.5 text-sm">
-                  {audience.items.map((item) => (
-                    <CheckItem key={item}>{item}</CheckItem>
-                  ))}
-                </ul>
-                <p className="mt-5 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-500">
-                  {audience.footer}
-                </p>
+                Book a Strategy Call
+              </a>
+              <a
+                href="#services"
+                className="w-full rounded-lg border border-slate-300 px-8 py-3.5 text-center text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
+              >
+                View Services
+              </a>
+            </div>
+          </div>
+
+          {/* stat strip */}
+          <div className="mx-auto mt-20 grid max-w-3xl grid-cols-3 gap-px rounded-2xl border border-slate-200 bg-slate-200 overflow-hidden shadow-sm">
+            {[
+              { value: "5", label: "Core Service Areas" },
+              { value: "AI-First", label: "Implementation Approach" },
+              { value: "End-to-End", label: "Strategy to Execution" },
+            ].map((s) => (
+              <div key={s.label} className="bg-white px-6 py-6 text-center">
+                <p className="text-2xl font-extrabold tracking-tight text-slate-900">{s.value}</p>
+                <p className="mt-1 text-xs font-medium text-slate-500">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="opportunities" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
-        <SectionHeading
-          eyebrow="Investment Opportunities"
-          title="Where we focus"
-          subtitle="Each opportunity is evaluated individually and structured with clear terms, repayment expectations, risk factors, and documentation."
-        />
-        <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {OPPORTUNITIES.map((item) => (
-            <div
-              key={item}
-              className="rounded-xl border border-slate-200 bg-white p-5 text-center text-sm font-semibold text-slate-800 shadow-sm transition hover:border-amber-400"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-slate-950 py-20 sm:py-24">
+      {/* ── Services ───────────────────────────────────────── */}
+      <section id="services" className="scroll-mt-20 bg-slate-50 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-amber-500">
-                Why Bayena Ventures
-              </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Private capital works when structure comes first.
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-slate-300">
-                We are not here to sell hype. We are here to structure serious opportunities.
-              </p>
-            </div>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {PRINCIPLES.map((principle) => (
-                <li
-                  key={principle}
-                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-slate-100"
-                >
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  {principle}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
-        <SectionHeading eyebrow="How It Works" title="From submission to management" />
-        <ol className="mx-auto mt-12 max-w-3xl space-y-8">
-          {STEPS.map((step, i) => (
-            <li key={step.title} className="flex gap-5">
-              <div className="flex flex-col items-center">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-amber-500">
-                  {i + 1}
-                </span>
-                {i < STEPS.length - 1 && (
-                  <span className="mt-2 w-px flex-1 bg-slate-200" aria-hidden="true" />
-                )}
-              </div>
-              <div className="pb-2">
-                <h3 className="text-lg font-semibold text-slate-900">{step.title}</h3>
-                <p className="mt-1 leading-relaxed text-slate-600">{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="bg-slate-50 py-20 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <SectionHeading eyebrow="Who We Work With" title="Our partners and clients" />
-          <div className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-3">
-            {WHO_WE_WORK_WITH.map((item) => (
-              <span
-                key={item}
-                className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24">
-        <SectionHeading
-          eyebrow="Contact"
-          title="Get in touch"
-          subtitle="Submit your funding request, join the investor list, or send us an opportunity for review."
-        />
-        <div className="mt-12">
-          <BayenaVenturesContactForm />
-        </div>
-      </section>
-
-      <footer className="border-t border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-          <div className="rounded-xl border border-slate-200 bg-white p-6">
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
-              Important Disclaimer
-            </h4>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Bayena Ventures is not a bank. All investments involve risk, including possible
-              loss of principal. Lending and investment opportunities are reviewed individually
-              and are not guaranteed. Any investment or loan opportunity should be evaluated
-              with proper legal, tax, and financial advisors.
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: BLUE }}>
+              What We Do
+            </p>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+              Services
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate-500">
+              From strategy to implementation — we build the systems that grow your business.
             </p>
           </div>
-          <div className="mt-10 flex justify-center">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-950 text-sm font-bold text-amber-500">
-                BV
-              </span>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service) => (
+              <div
+                key={service.id}
+                className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-sm transition hover:border-[#1a6b8a]/30 hover:shadow-md"
+              >
+                <h3 className="text-lg font-bold text-slate-900">{service.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">{service.description}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {service.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border px-3 py-1 text-xs font-medium text-slate-600 transition group-hover:border-[#1a6b8a]/30"
+                      style={{ borderColor: "#e2e8f0" }}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* CTA card */}
+            <div
+              className="flex flex-col items-start justify-between rounded-2xl p-7"
+              style={{ backgroundColor: NAVY }}
+            >
               <div>
-                <p className="text-sm font-semibold text-slate-900">Bayena Ventures</p>
-                <p className="text-xs text-slate-500">Private Capital. Structured Opportunity.</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                  Ready to start?
+                </p>
+                <h3 className="mt-3 text-xl font-bold leading-snug text-white">
+                  Let&apos;s build the systems your business needs to scale.
+                </h3>
+              </div>
+              <a
+                href="#contact"
+                className="mt-8 inline-block rounded-lg px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+                style={{ backgroundColor: BLUE }}
+              >
+                Book a Strategy Call →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why Bayena ─────────────────────────────────────── */}
+      <section id="why-bayena" className="scroll-mt-20 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="grid items-start gap-16 lg:grid-cols-2">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest" style={{ color: BLUE }}>
+                Why Bayena
+              </p>
+              <h2 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl">
+                Technology Alone Doesn&apos;t Create Growth.{" "}
+                <span style={{ color: BLUE }}>Systems Do.</span>
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-slate-500">
+                Bayena helps businesses implement the strategy, technology, and operational
+                systems needed to scale with confidence. We combine business consulting,
+                automation, and modern digital infrastructure to create sustainable growth.
+              </p>
+              <a
+                href="#contact"
+                className="mt-8 inline-block rounded-lg px-7 py-3.5 text-sm font-bold text-white transition hover:opacity-90"
+                style={{ backgroundColor: BLUE }}
+              >
+                Work With Us
+              </a>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              {DIFFERENTIATORS.map((d) => (
+                <div key={d.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                  <div
+                    className="mb-4 h-1 w-8 rounded-full"
+                    style={{ backgroundColor: BLUE }}
+                  />
+                  <h3 className="text-sm font-bold text-slate-900">{d.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-500">{d.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Process ────────────────────────────────────────── */}
+      <section className="bg-slate-50 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: BLUE }}>
+              How We Work
+            </p>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">
+              From Strategy to Execution
+            </h2>
+          </div>
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { step: "01", title: "Discover", body: "We audit your business, understand your goals, and identify the highest-leverage growth opportunities." },
+              { step: "02", title: "Design", body: "We design a tailored strategy — systems, automations, and digital assets — matched to your stage and objectives." },
+              { step: "03", title: "Build", body: "We implement everything: AI tools, sales workflows, websites, dashboards, and operating systems." },
+              { step: "04", title: "Scale", body: "We optimize, measure, and iterate so your systems keep performing as your business grows." },
+            ].map((item) => (
+              <div key={item.step} className="rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+                <span
+                  className="text-4xl font-black leading-none"
+                  style={{ color: `${BLUE}20` }}
+                >
+                  {item.step}
+                </span>
+                <h3 className="mt-4 text-base font-bold text-slate-900">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ──────────────────────────────────────── */}
+      <section className="py-24 sm:py-32" style={{ backgroundColor: NAVY }}>
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+            Get Started
+          </p>
+          <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            Ready to Build Faster and Scale Smarter?
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-slate-400">
+            Book a strategy call and let&apos;s map out exactly what your business needs to grow.
+          </p>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="#contact"
+              className="w-full rounded-lg px-8 py-3.5 text-center text-sm font-bold text-white transition hover:opacity-90 sm:w-auto"
+              style={{ backgroundColor: BLUE }}
+            >
+              Book a Strategy Call
+            </a>
+            <a
+              href="#services"
+              className="w-full rounded-lg border border-slate-600 px-8 py-3.5 text-center text-sm font-semibold text-slate-300 transition hover:border-slate-400 hover:text-white sm:w-auto"
+            >
+              View Services
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Contact ────────────────────────────────────────── */}
+      <section id="contact" className="scroll-mt-20 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: BLUE }}>
+              Contact
+            </p>
+            <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900">
+              Book a Strategy Call
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate-500">
+              Tell us about your business and goals. We&apos;ll follow up to schedule a call.
+            </p>
+          </div>
+          <div className="mt-12">
+            <BayenaVenturesContactForm defaultInquiryType="Book a consultation" />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Newsletter ─────────────────────────────────────── */}
+      <section className="py-20 sm:py-28" style={{ backgroundColor: NAVY }}>
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Stay in the Loop
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-slate-400">
+            Get practical insights on AI, business strategy, and growth systems — delivered to your inbox.
+          </p>
+          <div className="mt-8">
+            <NewsletterForm />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ─────────────────────────────────────────── */}
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+          <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <WhaleMark className="h-5 w-11 text-[#1a6b8a]" />
+              <div className="leading-tight">
+                <p className="text-sm font-bold text-slate-900">BAYENA</p>
+                <p className="text-xs font-medium tracking-widest uppercase text-slate-400">
+                  Strategy · Systems · Growth
+                </p>
               </div>
             </div>
+            <p className="max-w-sm text-sm leading-relaxed text-slate-500">
+              Bayena helps businesses launch, automate, and scale through AI, systems, and growth-focused strategy.
+            </p>
+            <p className="text-xs text-slate-400 whitespace-nowrap">
+              © {new Date().getFullYear()} Bayena. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
